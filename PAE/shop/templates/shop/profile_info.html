@@ -1,0 +1,14 @@
+{% extends "layout/basic.html" %}
+
+{% block title %} Мой профиль {% endblock %}
+
+{% block content %}
+
+    <h2 class="ml-5 mt-3">Доброго времени суток, {{ user.username }}</h2>
+
+
+<a href="#">Ваши сохраненные купоны</a><br><br>
+<a href="{% url 'shop:change_user_info'%}">Изменить данные</a><br><br>
+<a href="{% url 'shop:profile_logout' %}">Выйти</a>
+
+{% endblock %}
