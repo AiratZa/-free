@@ -1,0 +1,9 @@
+{% extends "layout/basic.html" %}
+
+{% block title %}Аккаунт уже активирован{% endblock %}
+
+{% block content %}
+
+    <h2>Активация аккаунта уже была выполнена ранее  </h2>
+    <a href="{% url 'shop:login' %}"><p>Войти на сайи</p></a>
+{% endblock %}

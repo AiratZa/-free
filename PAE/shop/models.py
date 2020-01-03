@@ -3,6 +3,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
+from django.dispatch import Signal
+from .utilities import send_activation_notification
+
+
 class UserInfo(AbstractUser):
     is_activated = models.BooleanField(default=True, db_index=True, verbose_name = 'Прошел активацию?')
     send_messages = models.BooleanField(default = True, verbose_name='Слать оповещения о новых акциях и скидках в любимых категориях?')
@@ -45,3 +49,11 @@ class Tag (models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length = 30)
+
+
+user_registrated = Signal(providing_args=['instance'])
+
+def user_registrated_dispatcher(sender, **kwargs):
+    send_activation_notification(kwargs['instance'])
+
+user_registrated.connect(user_registrated_dispatcher)

@@ -1,0 +1,9 @@
+{% extends "layout/basic.html" %}
+
+{% block title %}Ошибка при активации{% endblock %}
+
+{% block content %}
+
+    <h2>Активация аккаунта прошла неудачно.</h2>
+    <a href="{% url 'shop:register_user' %}"><p>Зарегестрироваться</p></a>
+{% endblock %}
