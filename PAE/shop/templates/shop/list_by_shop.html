@@ -1,0 +1,71 @@
+{% extends "layout/basic.html" %}
+
+{% load static %}
+
+
+{% block title %}Магазины с промокодами{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+
+    <div class="categories-list">
+
+        <h2>Магазины с промокодами </h2> <br>
+        <div class="list-char d-flex justify-content-center"><h3>
+                                <a  href="#char-0-9">0-9</a>
+                                <a  href="#char-A">A</a>
+                                <a  href="#char-B">B</a>
+                                <a  href="#char-C">C</a>
+                                <a  href="#char-D">D</a>
+                                <a  href="#char-E">E</a>
+                                <a  href="#char-F">F</a>
+                                <a  href="#char-G">G</a>
+                                <a  href="#char-H">H</a>
+                                <a  href="#char-I">I</a>
+                                <a  href="#char-J">J</a>
+                                <a  href="#char-K">K</a>
+                                <a  href="#char-L">L</a>
+                                <a  href="#char-M">M</a>
+                                <a  href="#char-N">N</a>
+                                <a  href="#char-O">O</a>
+                                <a  href="#char-P">P</a>
+                                <a  href="#char-Q">Q</a>
+                                <a  href="#char-R">R</a>
+                                <a  href="#char-S">S</a>
+                                <a  href="#char-T">T</a>
+                                <a  href="#char-U">U</a>
+                                <a  href="#char-V">V</a>
+                                <a  href="#char-W">W</a>
+                                <a  href="#char-X">X</a>
+                                <a  href="#char-Y">Y</a>
+                                <a  href="#char-Z">Z</a>
+                                </h3>
+                        </div>
+
+                
+    
+                <div class="topshop-home">
+                            
+                    <h2 class="title-dec" id="char-1">1</h2>
+                    <ul class="list-group list-group-horizontal-lg d-flex flex-wrap">
+        <script>
+            var mylist = {{json_list|safe}};
+            mylist.sort();
+            var first_char = '1'
+            for(i = 0; i < mylist.length; i++){
+                var name1 = mylist[i]['name'];
+                var url = "{% url 'shop:shop' name=12345 %}".replace(/12345/, name1.toString());
+                if (name1[0]==first_char){
+                    document.write('<li class="list-group-item"><a title="'+name+'" href="' +url+'">'+name1+'</a></li>');
+                }
+                else{
+                 first_char = name1[0];  
+                 document.write('</ul></div><div class="topshop-home"><h2 class="title-dec" id="char-'+first_char.toString()+'">'+first_char.toString()+'</h2><ul class="list-group list-group-horizontal-lg d-flex flex-wrap">')
+                    document.write('<li class="list-group-item"><a title="'+name+'" href="' +url+'">'+name1+'</a></li>');
+ 
+                }
+            };
+            </script>
+{% endblock %}

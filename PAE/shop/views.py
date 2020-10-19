@@ -13,15 +13,23 @@ from .models import UserInfo
 from .forms import ChangeUserInfoForm, RegisterUserForm
 
 
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, DeleteView
 from django.views.generic.base import TemplateView
 
 from django.core.signing import BadSignature
 from .utilities import signer
+
+from django.contrib.auth import logout
+from django.contrib import messages
+
+from .models import Shop
+
+import json
+from django.http import JsonResponse
 # Create your views here.
 
 def index(request):
-    return render(request, 'shop/12.html')
+    return render(request, 'shop/main_page.html')
 
 class PromoLoginView(LoginView):
     template_name = 'shop/login.html'
@@ -83,3 +91,41 @@ def user_activate(request, sign):
         user.is_activated = True
         user.save()
     return render(request, template)
+
+class DeleteUserView(DeleteView):
+    model = UserInfo
+    template_name = 'shop/delete_user.html'
+    success_url = reverse_lazy('shop:index')
+
+    def dispatch(self, request, *args, **kwargs):
+        self.user_id = request.user.pk
+        return super().dispatch(request, *args, **kwargs)
+    
+    def post(self, request, *args, **kwargs):
+        logout(request)
+        messages.add_message(request, messages.SUCCESS, 
+                             'Пользователь удален')
+        return super().post(request, *args, **kwargs)
+
+    def get_object(self, queryset = None):
+        if not queryset:
+            queryset = self.get_queryset()
+        return get_object_or_404(queryset, pk = self.user_id)
+
+
+def by_category (request, pk):
+    pass
+def shop(request, name):
+    context = {}
+    context['shop'] = get_object_or_404(Shop, name = name)
+    return render(request, 'shop/shop.html', context)
+
+def list_by_category (request):
+    pass
+
+def list_by_shop(request):
+    context = {}
+    context['shops'] = list(Shop.objects.order_by('name').values())
+    context['json_list'] = json.dumps(context['shops'])
+
+    return render(request, 'shop/list_by_shop.html', context)

@@ -1,0 +1,13 @@
+{% extends "layout/basic.html" %}
+
+{% block title %}Акции магазина {{shop.name}}{% endblock %}
+
+{% block content %}
+
+    <h2>Акции магазина {{shop.name}} </h2> <br>
+    <div class="d-flex justify-content-center" >
+        <img src="{{ shop.logo_img.url }}" alt="">
+    </div>
+    
+
+{% endblock %}

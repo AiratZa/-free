@@ -26,7 +26,10 @@
       <label class="form-check-label" for="exampleCheck1">Check me out</label>
     </div-->
     <button type="submit" class="btn btn-primary" style="width: 400px;">Submit</button> 
-  </form>
+  </form><br><br>
+  <a href="{% url 'social:begin' 'vk-oauth2' %}">    <button  class="btn btn-primary" style="width: 400px;">Авторизация через Вконтакте</button> 
+<br><br>
+  
   <a href="{% url 'shop:register_user' %}">    <button  class="btn btn-primary" style="width: 400px;">Регистрация нового пользователя</button> 
   </a>
 </div>

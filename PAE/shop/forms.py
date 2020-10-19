@@ -49,7 +49,7 @@ class RegisterUserForm(forms.ModelForm):
             user.save()
         user_registrated.send(RegisterUserForm, instance = user)
         return user
-
+        
     class Meta:
         model = UserInfo
         fields = ('username', 'email', 'password1', 'password2', 
